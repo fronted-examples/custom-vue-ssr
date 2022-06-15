@@ -6,7 +6,7 @@ import { createApp } from './app'
 const { app, router, store } = createApp()
 
 if (window.__INITIAL_STATE__) {
-  // 替换容器的数据状态
+  // 将window.__INITIAL_STATE__的数据替换到客户端的store中
   store.replaceState(window.__INITIAL_STATE__)
 }
 
