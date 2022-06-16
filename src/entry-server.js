@@ -2,15 +2,29 @@
 import { createApp } from './app'
 
 // 使用async/await改造上述代码
-export default async context => {
-  const { app, router,store } = createApp()
+export default async (context) => {
+  const { app, router, store } = createApp()
   const meta = app.$meta()
   // 用于设置服务器端router的位置
   router.push(context.url)
   context.meta = meta
+
   // this的指向router
   await new Promise(router.onReady.bind(router))
-  
+
+  const matchedComponents = router.getMatchedComponents()
+
+  await Promise.all(
+    matchedComponents.map((component) => {
+      if (component.asyncData) {
+        return component.asyncData({
+          store,
+          route: router.currentRoute,
+        })
+      }
+    })
+  )
+
   context.rendered = () => {
     // Renderer 会把 context.state 数据对象内联到页面模板中
     // 最终发送给客户端的页面中会包含一段脚本：window.__INITIAL_STATE__ = context.state

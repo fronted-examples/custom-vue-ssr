@@ -14,12 +14,16 @@ export default {
   computed: {
     ...mapState(['posts'])
   },
-  // Vue SSR 特殊为服务端渲染提供的一个生命周期钩子函数(渲染之前调用)
-  serverPrefetch () {
-    // 发起 action，返回 Promise
-    // this.$store.dispatch('getPosts')
-    return this.getPosts()
+  asyncData ({ store, route }) {
+    return store.dispatch('getPosts')
   },
+  // Vue SSR 特殊为服务端渲染提供的一个生命周期钩子函数(渲染之前调用)
+  // serverPrefetch () {
+  //   // 发起 action，返回 Promise
+  //   // this.$store.dispatch('getPosts')
+  //   console.log('serverPrefetch')
+  //   return this.getPosts()
+  // },
   methods: {
     ...mapActions(['getPosts'])
   }

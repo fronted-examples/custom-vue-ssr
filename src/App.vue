@@ -8,6 +8,7 @@
                 <router-link to='/about'>About</router-link>
             </li>
             <li>
+                <!-- <span @click="toPost">Posts</span> -->
                 <router-link to="/posts">Posts</router-link>
             </li>
         </ul>
@@ -18,6 +19,11 @@
 
 <script>
     export default {
-      name: "App"
+      name: "App",
+      methods: {
+        toPost () {
+          location.href = '/posts'
+        }
+      }
     };
 </script>

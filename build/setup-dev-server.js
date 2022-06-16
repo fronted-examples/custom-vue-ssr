@@ -28,7 +28,7 @@ module.exports = (server, callback) => {
     }
   }
 
-  //update() // 初始调用
+  // update() // 初始调用
 
   // 处理模板文件：监视构建 template -> 调用 update -> 更新 Renderer 渲染器
   const templatePath = resolve('../index.html') // 获取模板文件路径
