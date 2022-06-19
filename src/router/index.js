@@ -11,16 +11,16 @@ export function createRouter () {
     mode: 'history',
     routes: [
         {
-            path: '/',
+            path: '/vue-ssr/',
             name: 'Home',
             component: Home
         },{
-            path: '/about',
+            path: '/vue-ssr/about',
             name: 'About',
              // 懒加载路由 按需加载，异步的
             component: ()=> import('@/views/About/index')
         },{
-            path: '/posts',
+            path: '/vue-ssr/posts',
             name: 'Posts',
             component: ()=> import('@/views/Posts/index')
         },{

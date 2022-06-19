@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Post List</h1>
+    <el-button @click="handleClick">测试接入element-ui</el-button>
     <ul>
       <li v-for="post in posts" :key="post.id">{{ post.title }}</li>
     </ul>
@@ -25,7 +26,10 @@ export default {
   //   return this.getPosts()
   // },
   methods: {
-    ...mapActions(['getPosts'])
+    ...mapActions(['getPosts']),
+    handleClick  (e) {
+      console.log('打野')
+    }
   }
 }
 </script>

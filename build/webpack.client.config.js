@@ -63,18 +63,19 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            // 解决 export 'default' (imported as 'mod') was not found
-                            // 启用 CommonJS 语法
-                            esModule: false,
-                        },
-                    },
-                    'css-loader'
-                ]
+              test: /\.(c|sc)ss$/,
+              use: [
+                  {
+                      loader: MiniCssExtractPlugin.loader,
+                      options: {
+                          // 解决 export 'default' (imported as 'mod') was not found
+                          // 启用 CommonJS 语法
+                          esModule: false,
+                      },
+                  },
+                  'css-loader',
+                  'sass-loader'
+              ]
             }
         ]
     },

@@ -2,14 +2,14 @@
     <div id="app">
         <ul>
             <li>
-                <router-link to='/'>Home</router-link>
+                <router-link to='/vue-ssr/'>Home</router-link>
             </li>
             <li>
-                <router-link to='/about'>About</router-link>
+                <router-link to='/vue-ssr/about'>About</router-link>
             </li>
             <li>
                 <!-- <span @click="toPost">Posts</span> -->
-                <router-link to="/posts">Posts</router-link>
+                <router-link to="/vue-ssr/posts">Posts</router-link>
             </li>
         </ul>
         <!-- 路由出口 -->

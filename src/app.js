@@ -4,7 +4,13 @@ import VueMeta from 'vue-meta'
 import { createRouter } from "./router";
 import { createStore } from './store/index'
 
+// import '@/utils/flexible'
+
+import { Button, Select } from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css'
+
 Vue.use(VueMeta)
+Vue.use(Button)
 
 Vue.mixin({
   metaInfo:{

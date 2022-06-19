@@ -17,7 +17,9 @@
   "dependencies": {
     "axios": "^0.27.2",
     "cross-env": "^7.0.3",
+    "element-ui": "^2.15.9",
     "express": "^4.18.1",
+    "jsdom": "^15.2.1",
     "serve-favicon": "^2.5.0",
     "vue": "^2.6.14",
     "vue-router": "^3.5.4",
@@ -34,12 +36,17 @@
     "babel-loader": "^8.0.6",
     "chokidar": "^3.5.3",
     "compression-webpack-plugin": "^6.1.1",
-    "css-loader": "^6.7.1",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^5.2.7",
     "css-minimizer-webpack-plugin": "^1.0.0",
     "file-loader": "^6.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "mini-css-extract-plugin": "^0.9.0",
+    "postcss": "^8.4.14",
+    "postcss-pxtorem": "^6.0.0",
     "rimraf": "^3.0.2",
+    "sass": "^1.52.3",
+    "sass-loader": "^7.3.1",
     "url-loader": "^4.1.1",
     "vue-loader": "^15.9.8",
     "vue-meta": "^2.4.0",
@@ -51,5 +58,23 @@
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^2.5.2",
     "webpackbar": "^5.0.2"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {},
+      "postcss-pxtorem": {
+        "rootValue": 100,
+        "replace": true,
+        "propWhiteList": [
+          "*"
+        ],
+        "_comment": "意思是所有小于2px的样式都不被转换",
+        "minPixelValue": 2,
+        "_comment1": "对css选择器进行过滤的数组，class以mint-开头不被转换",
+        "selectorBlackList": [
+          "mint-"
+        ]
+      }
+    }
   }
 }

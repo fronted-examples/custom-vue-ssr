@@ -7,7 +7,7 @@ const server = express()
 const fs = require('fs')
 const favicon = require('serve-favicon')
 const { createBundleRenderer } = require('vue-server-renderer')
-const setupDevServer = require('./build/setup-dev-server')
+const setupDevServer = require('../build/setup-dev-server')
 
 let renderer
 let onReady
@@ -20,7 +20,7 @@ onReady = setupDevServer(server, (serverBundle, template, clientManifest) => {
   })
 })
 
-server.use(favicon('../static/favicon.ico'))
+// server.use(favicon('./static/favicon.ico'))
 // 开头的路径，需要与 output 中设置的 publicPath 保持一致
 server.use('/dist', express.static('../dist'))
 
@@ -45,7 +45,7 @@ const render = async (req, res) => {
 // 添加路由
 // 服务端路由设置为 *，意味着所有的路由都会进入这里,不然会导致刷新页面，获取不到页面的bug
 // 并且vue-router设置的404页面无法进入
-server.get('*', async (req, res) => {
+server.get('/vue-ssr/*', async (req, res) => {
   // 等待有了 Renderer 渲染器以后，调用 render 函数
   await onReady
   render(req, res)

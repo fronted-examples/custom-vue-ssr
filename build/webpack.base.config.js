@@ -1,5 +1,6 @@
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const isProd = process.env.NODE_ENV === 'production'
 
 function resolve(dir) {
@@ -58,5 +59,11 @@ module.exports = {
       },
     ],
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, '../static'),
+      to: 'static',
+      ignore: ['.*']
+    }]),
+    new VueLoaderPlugin()],
 }
