@@ -1,3 +1,7 @@
+/**
+ * 要想postcss.config.js被自动引入，必须在配置文件里配置postcss-loader
+ * 同时postcss-loader的版本必须和webpack的版本保持一致
+ */
 module.exports = {    
   "plugins": {        
       "postcss-px2rem": {     
