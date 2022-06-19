@@ -4,8 +4,6 @@ import VueMeta from 'vue-meta'
 import { createRouter } from "./router";
 import { createStore } from './store/index'
 
-// import '@/utils/flexible'
-
 import { Button, Select } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -18,6 +16,10 @@ Vue.mixin({
     titleTemplate:'%s - vue SSR'
   }
 })
+
+if (process.env.VUE_ENV === "client") {
+  require('@/utils/flexible')
+}
 
 // 需要返回一个应用程序工厂: 返回Vue实例和Router实例
 export function createApp(context) {

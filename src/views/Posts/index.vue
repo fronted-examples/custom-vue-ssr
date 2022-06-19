@@ -2,8 +2,8 @@
   <div>
     <h1>Post List</h1>
     <el-button @click="handleClick">测试接入element-ui</el-button>
-    <ul>
-      <li v-for="post in posts" :key="post.id">{{ post.title }}</li>
+    <ul class="ul">
+      <li class="li" v-for="post in posts" :key="post.id">{{ post.title }}</li>
     </ul>
   </div>
 </template>
@@ -33,3 +33,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.ul {
+  .li {
+  font-size: 50px;
+}
+}
+</style>

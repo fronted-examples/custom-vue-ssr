@@ -45,6 +45,23 @@ module.exports = {
         },
       },
       {
+        test: /\.(sc|c)ss$/,
+        use: [
+            // fallback to style-loader in development
+            isProd !== 'production' ? 'vue-style-loader' : {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                // 解决 export 'default' (imported as 'mod') was not found
+                // 启用 CommonJS 语法
+                esModule: false,
+              },
+            },
+            "css-loader",
+            "postcss-loader",
+            "sass-loader"
+        ]
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
