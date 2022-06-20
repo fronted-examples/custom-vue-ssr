@@ -9,13 +9,12 @@ const favicon = require('serve-favicon')
 const { createBundleRenderer } = require('vue-server-renderer')
 const { minify } = require('html-minifier')
 
-const port = 3000
 let renderer
 
 const template = fs.readFileSync('./index.html', 'utf-8')
 // 生产模式，直接基于已构建好的包创建渲染器
-const serverBundle = require('../dist/vue-ssr-server-bundle.json')
-const clientManifest = require('../dist/vue-ssr-client-manifest.json')
+const serverBundle = require('./dist/vue-ssr-server-bundle.json')
+const clientManifest = require('./dist/vue-ssr-client-manifest.json')
 // 创建一个渲染器
 renderer = createBundleRenderer(serverBundle, {
   template, // (可选) 设置页面模板
@@ -52,6 +51,6 @@ server.get(
   render // 生产模式：使用构建好的包直接渲染
 )
 
-server.listen(port, '127.0.0.1', () => {
+server.listen(3000,() => {
   console.log('server running at port 3000')
 })
