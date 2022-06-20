@@ -7,6 +7,7 @@ const server = express()
 const fs = require('fs')
 const favicon = require('serve-favicon')
 const { createBundleRenderer } = require('vue-server-renderer')
+const { minify } = require('html-minifier')
 
 const port = 3000
 let renderer
@@ -36,7 +37,7 @@ const render = async (req, res) => {
       url: req.url,
     })
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
-    res.end(html)
+    res.end(minify(html, { collapseWhitespace: true, minifyCSS: true}))
   } catch (error) {
     console.log('err: ', error)
     res.status(500).end('Internal Server Error')

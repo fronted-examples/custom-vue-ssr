@@ -9,6 +9,7 @@ const favicon = require('serve-favicon')
 const { createBundleRenderer } = require('vue-server-renderer')
 const setupDevServer = require('../build/setup-dev-server')
 
+
 let renderer
 let onReady
 
