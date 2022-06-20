@@ -7,6 +7,8 @@ import { createStore } from './store/index'
 import { Button, Select } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 
+// import '@/utils/flexible'
+
 Vue.use(VueMeta)
 Vue.use(Button)
 
@@ -17,9 +19,9 @@ Vue.mixin({
   }
 })
 
-if (process.env.VUE_ENV === "client") {
-  require('@/utils/flexible')
-}
+// if (process.env.VUE_ENV === "client") {
+//   require('@/utils/flexible')
+// }
 
 // 需要返回一个应用程序工厂: 返回Vue实例和Router实例
 export function createApp(context) {
@@ -31,5 +33,8 @@ export function createApp(context) {
     store,
     render: (h) => h(App),
   })
+
+  // require('@/utils/flexible')
+
   return { app, router, store }
 }
