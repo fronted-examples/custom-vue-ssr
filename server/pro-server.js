@@ -5,7 +5,6 @@
 const express = require('express')
 const server = express()
 const fs = require('fs')
-const favicon = require('serve-favicon')
 const { createBundleRenderer } = require('vue-server-renderer')
 const { minify } = require('html-minifier')
 
@@ -22,7 +21,6 @@ renderer = createBundleRenderer(serverBundle, {
   clientManifest, // (可选) 客户端构建
 })
 
-// server.use(favicon('./static/favicon.ico'))
 // 开头的路径，需要与 output 中设置的 publicPath 保持一致
 server.use('/dist', express.static('./dist'))
 
@@ -52,6 +50,6 @@ server.get(
   render // 生产模式：使用构建好的包直接渲染
 )
 
-server.listen(port, '127.0.0.1', () => {
+server.listen(port, () => {
   console.log('server running at port 3000')
 })

@@ -4,12 +4,8 @@
 // 创建一个 express 的 server 实例
 const express = require('express')
 const server = express()
-const fs = require('fs')
-const favicon = require('serve-favicon')
 const { createBundleRenderer } = require('vue-server-renderer')
 const setupDevServer = require('../build/setup-dev-server')
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
 
 let renderer
 let onReady
@@ -36,31 +32,6 @@ const render = async (req, res) => {
       // entry-server.js用于设置服务器端router的位置
       url: req.url,
     })
-
-    // console.log('html: ', html)
-
-    // /**
-    //  * 使用jsdom虚拟化window对象，以免使用SSR的时候报错
-    //  */
-    // const DOM = new JSDOM(html, {
-    //   url: 'http:/localhost:3000',
-    //   resources: 'usable',
-    //   runScripts: global.UNSAFE_MODE ? 'dangerously' : 'outside-only',
-    // })
-    // global.window = DOM.window
-    // global.document = global.window.document
-    // global.navigator = global.window.navigator
-    // //因为有些时候我们为了方便直接使用 Node 或者 navigator使用
-    // //并没有window.Node window.navigator 所以也得把这些在window下常用的对象扩展到global中
-    // global.requestAnimationFrame = global.window.requestAnimationFrame
-    // global.cancelAnimationFrame = global.window.cancelAnimationFrame
-    // global.Node = global.window.Node
-    // global.NodeList = global.window.NodeList
-    // global.DOMParser = global.window.DOMParser
-
-    // console.log('global: ', global.window.location, global.window.location.origin)
-
-    // require('../static/flexible')
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
     res.end(html)
