@@ -5,7 +5,6 @@
 const express = require('express')
 const server = express()
 const fs = require('fs')
-const favicon = require('serve-favicon')
 const { createBundleRenderer } = require('vue-server-renderer')
 const { minify } = require('html-minifier')
 
@@ -21,7 +20,6 @@ renderer = createBundleRenderer(serverBundle, {
   clientManifest, // (可选) 客户端构建
 })
 
-// server.use(favicon('./static/favicon.ico'))
 // 开头的路径，需要与 output 中设置的 publicPath 保持一致
 server.use('/dist', express.static('./dist'))
 

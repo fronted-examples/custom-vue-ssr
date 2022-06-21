@@ -6,7 +6,7 @@ const isProd = process.env.NODE_ENV === 'production'
  * 使用jsdom虚拟化window对象，以免使用SSR的时候报错
  */
 const DOM = new JSDOM('', {
-  url: isProd ? 'http://101.35.44.70/vue-ssr' : 'http://localhost:3000/vue-ssr/',
+  url: isProd ? 'http://101.35.44.70:80/vue-ssr' : 'http://localhost:3000/vue-ssr/',
   resources: 'usable',
   runScripts: global.UNSAFE_MODE ? 'dangerously' : 'outside-only',
 })
