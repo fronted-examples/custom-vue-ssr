@@ -14,6 +14,9 @@ export default {
     return {
       
     }
+  },
+  beforeCreate () {
+    console.log('gbl: ', global.window.location.origin)
   }
 }
 </script>

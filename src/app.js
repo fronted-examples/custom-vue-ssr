@@ -19,9 +19,10 @@ Vue.mixin({
   }
 })
 
-// if (process.env.VUE_ENV === "client") {
-//   require('@/utils/flexible')
-// }
+if (process.env.VUE_ENV === "server") {
+  require('@/utils/server-add-window.js')
+  require('@/utils/flexible')
+}
 
 // 需要返回一个应用程序工厂: 返回Vue实例和Router实例
 export function createApp(context) {
