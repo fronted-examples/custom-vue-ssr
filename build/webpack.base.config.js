@@ -1,9 +1,11 @@
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const webpack = require('webpack')
+
 const isProd = process.env.NODE_ENV === 'production'
 
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -21,10 +23,10 @@ module.exports = {
     chunkFilename: '[name].[contenthash].js',
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json', '.css'],
+    extensions: ['.js', '.vue', '.json', '.css', '.scss'],
     alias: {
       public: resolve('public'),
-      '@': resolve('src'),
+      '@': resolve('src')
     },
   },
   module: {
@@ -47,18 +49,18 @@ module.exports = {
       {
         test: /\.(sc|c)ss$/,
         use: [
-            // fallback to style-loader in development
-            isProd !== 'production' ? 'vue-style-loader' : {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                // 解决 export 'default' (imported as 'mod') was not found
-                // 启用 CommonJS 语法
-                esModule: false,
-              },
+          // fallback to style-loader in development
+          isProd !== 'production' ? 'vue-style-loader' : {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // 解决 export 'default' (imported as 'mod') was not found
+              // 启用 CommonJS 语法
+              esModule: false,
             },
-            "css-loader",
-            "postcss-loader",
-            "sass-loader"
+          },
+          "css-loader",
+          "postcss-loader",
+          "sass-loader"
         ]
       },
       {
@@ -67,16 +69,45 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|svg|jpg|gif|ico)$/,
-        use: ['file-loader'],
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        //这个不处理svg图片，因为我们独立拆开让svg-sprite-loader来处理了
+        exclude: [resolve('src/icons')],
+        options: {
+          limit: 10000,
+          name: 'img/[name].[hash:7].[ext]'
+        }
       },
       {
-        test: /\.(woff|eot|ttf)\??.*$/,
-        loader: 'url-loader?name=fonts/[name].[md5:hash:hex:7].[ext]',
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+        include: [resolve('src/icons')],
+        options: {
+          symbolId: 'icon-[name]'//去掉svg这个图片加载不出来
+        }
       },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'media/[name].[hash:7].[ext]'
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'fonts/[name].[hash:7].[ext]'
+        }
+      }
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': isProd ? require('../config/prod.env') : require('../config/dev.env')
+    }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, '../static'),
       to: 'static',
